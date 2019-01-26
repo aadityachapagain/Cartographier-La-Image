@@ -28,7 +28,7 @@ class App extends Component {
     }
     return(
       <div>
-        <canvas ref="canvas" width={this.state.dimensions.width} height={this.state.dimensions.height} />
+        <MyCanvas image={this.refs.image} width={this.state.dimensions.width} height={this.state.dimensions.height} />
       </div>
     )
   }
@@ -47,6 +47,27 @@ class App extends Component {
       </div>
     );
   }
+}
+
+class MyCanvas extends Component {
+
+  componentDidMount(){
+    const canvas = this.refs.canvas
+    const ctx = canvas.getContext("2d")
+    const img = this.props.image
+
+    ctx.drawImage(img, 0, 0)
+    ctx.font = "40px Courier"
+    ctx.fillText("अंग्रेजी", 210, 75)
+  }
+  render(){
+    const height = this.props.height
+    const width = this.props.width
+    return(
+      <canvas ref='canvas' height={height} width={width}></canvas>
+    )
+  }
+  
 }
 
 export default App;
