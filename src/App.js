@@ -56,15 +56,25 @@ class MyCanvas extends Component {
     const ctx = canvas.getContext("2d")
     const img = this.props.image
 
+    this.setState({ctx,img})
+
     ctx.drawImage(img, 0, 0)
-    ctx.font = "40px Courier"
+    ctx.font = "20px Courier"
     ctx.fillText("अंग्रेजी", 210, 75)
+  }
+  handleCanvasClick = (e)=>{
+    const rect = this.refs.canvas.getBoundingClientRect();
+    console.log("clicked !")
+    console.log(e.clientX - rect.left)
+    console.log(e.clientY - rect.top)
+    this.state.ctx.fillText("अंग्रेजी", e.clientX - rect.left, e.clientY - rect.top + 10)
+    
   }
   render(){
     const height = this.props.height
     const width = this.props.width
     return(
-      <canvas ref='canvas' height={height} width={width}></canvas>
+      <canvas ref='canvas' height={height} width={width} onClick={this.handleCanvasClick}></canvas>
     )
   }
   
