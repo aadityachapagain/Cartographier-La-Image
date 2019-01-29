@@ -1,11 +1,14 @@
 const initState = {
     images:[],
-    currentCanvas:null,
-    struct:[],
-    currentImage:null,
-    text:{size:20}
-    
-
+    currentCanvas:null,   //current canvas object
+    currentImage:null,    //current image id and data
+    text:{size:20},
+    currentGroup:null,    //current group id
+    currentField:null,    //current field id
+    isFieldActive:false,
+    isGroupActive:false,
+    groups:[],     //contains id,img_id,name 
+    fields:[],     //contains id,group_id,name,text_size,location:{x,y}
 }
 
 const rootReducer = (state = initState, action ) => {
@@ -20,6 +23,7 @@ const rootReducer = (state = initState, action ) => {
     }
 
     if (action.type === 'ADD_IMAGE'){
+
         return {
             ...state,
             images:[...state.images, action.image]
@@ -39,13 +43,35 @@ const rootReducer = (state = initState, action ) => {
         }
     }
 
-    if (action.type === 'DELETE_TODO'){
-        let newTodos = state.todos.filter(todo => {
-            return action.id !== todo.id
-        })
+    if(action.type === 'ADD_GROUP'){
+        let group = {id:action.id,img_id:state.currentImage.id,name:action.name}
         return {
             ...state,
-            todos: newTodos
+            groups:[...state.groups,group]
+        }
+    }
+
+    if (action.type === 'UPDATE_GROUP'){
+        return {
+            ...state,
+            currentGroup:action.id,
+            isGroupActive:true
+        }
+    }
+
+    if (action.type === 'ADD_FIELD'){
+        let field = {...action.data,group_id:state.currentGroup}
+        return {
+            ...state,
+            fields:[...state.fields,field]
+        }
+    }
+
+    if (action.type === 'CHANGE_FIELD_STATE'){
+        return {
+            ...state,
+            currentField:action.id,
+            isFieldActive:true
         }
     }
     return state;
