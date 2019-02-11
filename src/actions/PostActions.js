@@ -29,7 +29,8 @@ const addData = (data) => {
     if ( data.signal === 'CHANGE_FIELD_STATE'){
         return {
             type:'CHANGE_FIELD_STATE',
-            id:data.id
+            id:data.id,
+            text_size:data.text_size
         }
     }
 }

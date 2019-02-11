@@ -8,6 +8,9 @@ class Canvas extends Component{
     return (
       <div>
         <Controller />
+        <div>
+        
+        </div>
       </div>
     )
   }

@@ -68,10 +68,19 @@ const rootReducer = (state = initState, action ) => {
     }
 
     if (action.type === 'CHANGE_FIELD_STATE'){
+
+        let fields = state.fields.map( field => {
+            if (action.id === field.id){
+                return {...field,text_size:action.text_size}
+            }
+            return field
+        })
+
         return {
             ...state,
             currentField:action.id,
-            isFieldActive:true
+            isFieldActive:true,
+            fields
         }
     }
     return state;

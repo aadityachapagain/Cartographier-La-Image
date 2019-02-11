@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { addData } from '../actions/PostActions';
 import  '../css/controller.css'
 
+// Imorting  Canvas form to dynamically generate canvas during click
+import  CanvasForm from '../canvas/form'
+
 
 class Controller extends Component {
 
@@ -11,7 +14,6 @@ class Controller extends Component {
         this.state = {
             name:'',
             size:20,
-            text_size:20,
         }
     }
     handleGroup = (id) => {
@@ -41,17 +43,6 @@ class Controller extends Component {
         this.setState({name:event.target.value})
     }
 
-    changeFieldState = (id) => {
-        this.props.dispatch({id,signal:'CHANGE_FIELD_STATE'})
-    }
-
-    handleTextSize = (event) => {
-        this.setState({text_size:event.target.value})
-    }
-
-    handleClickTextSize = (id => {
-        this.setState({field_id:id})
-    })
     render(){
         const { fields, groups, currentGroup, img} = this.props;
         var activeGroup = ''
@@ -75,19 +66,7 @@ class Controller extends Component {
 
         const FieldsList = fields.length ? ( fields.map( (field) => {
             return(
-                <div className="col s12 m9 l9" key={field.id}>
-                    <div className="row">
-                        <div className="col s12 m4 l4">{field.name}</div>
-                        <div className="input-field col s12 m4 l4">
-                            <input value={this.state.text_size} id="text_size" type="No" className="validate" onChange={this.handleTextSize} onClick={() => {this.handleClickTextSize(field.id)}}/>
-                            <label className="active" htmlFor="text_size">text_size</label>
-                        </div>
-                        <div className="input-field col s12 m4 l4">
-                            <button className="w3-btn w3-red" onClick={()=>{this.changeFieldState(field.id)}}>Locate</button>
-                        </div>
-                    </div>
-
-                </div>
+                <CanvasForm name={field.name} id={field.id} />
             )
         })):(
             <div className="w3-center">No Fields yet! click create button to create fields</div>
