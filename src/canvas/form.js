@@ -27,7 +27,7 @@ class CanvasForm extends Component {
             <div className="col s12 m9 l9">
                     <div className="row">
                         <div className="col s12 m4 l4">{this.props.name}</div>
-                        <div className="input-field col s12 m4 l4">
+                        <div className="input-field col s10 m4 l4">
                             <input value={this.state.text_size} id="text_size" type="text"  pattern="[0-9]*" className="validate" onChange={this.handleTextSize} />
                             <label className="active" htmlFor="text_size">text_size</label>
                         </div>
