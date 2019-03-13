@@ -33,13 +33,21 @@ const addData = (data) => {
             text_size:data.text_size
         }
     }
+
+    if ( data.signal === 'CHANGE_TEXT_SIZE'){
+        return {
+            type:'CHANGE_TEXT_SIZE',
+            id:data.id,
+            text_size:data.text_size
+        }
+    }
 }
 
 const addImage = (image) => {
     if (image.signal === 'LIST'){
         return {
             type: 'ADD_IMAGE',
-            image:{id:image.id,'img':image.img}
+            image:{id:image.id,'img':image.img,height:image.height,width:image.width}
         }
     }
     if (image.signal === 'CURR'){
@@ -50,4 +58,11 @@ const addImage = (image) => {
     }
 }
 
-export {deletePost, addData, addImage}
+const giveLocation = (data) => {
+    return {
+        type: 'UPDATE_FIELD_LOC',
+        data
+    }
+}
+
+export {deletePost, addData, addImage, giveLocation}

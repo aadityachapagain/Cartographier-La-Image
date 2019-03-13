@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+
 import Controller  from './Controller'
+import CanvasController from './CanvasController'
 
 class Canvas extends Component{
 
@@ -9,7 +11,7 @@ class Canvas extends Component{
       <div>
         <Controller />
         <div>
-        
+        <CanvasController />
         </div>
       </div>
     )

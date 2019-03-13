@@ -9,7 +9,8 @@ class Upload extends Component {
     handleChange = (event) => {
         try{
         let image = URL.createObjectURL(event.target.files[0])
-        this.props.dispatch({id:Math.random(),'img':image,signal:'LIST'})
+        console.log('height:',image.naturalHeight,'width:',image.naturalWidth)
+        this.props.dispatch({id:Math.random(),'img':image,height:image.naturalHeight,width:image.naturalWidth,signal:'LIST'})
     } catch(err){
         console.log('Error while uploading file')
     }

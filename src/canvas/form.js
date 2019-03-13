@@ -16,6 +16,7 @@ class CanvasForm extends Component {
         // (event.target.validity.valid) ? event.target.value : this.state.text_size
 
         this.setState({text_size:(event.target.validity.valid) ? event.target.value : this.state.text_size})
+        this.props.dispatch({id:this.props.id,text_size:this.state.text_size,signal:'CHANGE_TEXT_SIZE'})
     }
 
     changeFieldState = (id) => {

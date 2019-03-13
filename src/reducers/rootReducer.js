@@ -75,7 +75,6 @@ const rootReducer = (state = initState, action ) => {
             }
             return field
         })
-
         return {
             ...state,
             currentField:action.id,
@@ -83,6 +82,42 @@ const rootReducer = (state = initState, action ) => {
             fields
         }
     }
+
+    if (action.type === 'CHANGE_TEXT_SIZE'){
+
+        let fields = state.fields.map( field => {
+            if (action.id === field.id){
+                return {...field,text_size:action.text_size}
+            }
+            return field
+        })
+        return {
+            ...state,
+            fields
+        }
+    }
+    if (action.type === 'UPDATE_FIELD_LOC'){
+        if (state.isFieldActive){
+            console.log(action.data)
+            let fields = state.fields.map( field => {
+                if (state.currentField === field.id){
+                    return {...field,location:{x:action.data.X,y:action.data.y}}
+                }
+                return field
+            })
+            return {
+                ...state,
+                isFieldActive:false,
+                fields
+            }
+        }
+        else{
+            return {
+                ...state
+            }
+        }
+    }
+
     return state;
 }
 
