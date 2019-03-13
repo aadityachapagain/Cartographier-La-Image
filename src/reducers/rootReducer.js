@@ -7,8 +7,9 @@ const initState = {
     currentField:null,    //current field id
     isFieldActive:false,
     isGroupActive:false,
-    groups:[],     //contains id,img_id,name 
-    fields:[],     //contains id,group_id,name,text_size,location:{x,y}
+    groups:[],     //contains objects of id,img_id,name 
+    fields:[],     //contains objects of {id,group_id,name,text_size,location:{x,y}}
+    data:[],      //contains {unique data's name:{id-of-fields:value,id-of-fields:value, ...}}
 }
 
 const rootReducer = (state = initState, action ) => {
